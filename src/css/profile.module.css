@@ -1,0 +1,139 @@
+:root {
+    --dark-gray: #505050;
+    --dark-blue: #488697;
+    --light-blue: #5ad6f7;
+} 
+
+.profilePicture {
+    width: 8vh;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    margin-left: -4vh;
+    border-radius: 100%;
+    border: 1px solid lightgray;
+    padding: 4px;
+}
+
+.profileInfo {
+    width: 40vh;
+    height: 20vh;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-left: -20vh;
+}
+
+.profileInfoTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.usernameLabel {
+    color: white;
+    font-family: sans-serif; 
+}
+
+.editProfile {
+    background: var(--dark-blue);
+    border: none;
+    padding: 0.25vh 0.75vh 0.5vh 0.75vh;
+    color: white;
+    height: 3vh;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.statContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1.5vh;
+    font-family: sans-serif;
+    color: white;
+    height: 5vh;
+    margin-top: 2vh;
+}
+
+.statContainer div {
+    display: flex;
+}
+
+.statContainer h4 {
+    margin-right: 0.5vh;
+}
+
+.bioContainer {
+    font-family: sans-serif;
+    color: white;
+}
+
+.bio {
+    font-size: 1.35vh;
+}
+
+.profileContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60vw;
+    height: auto;
+    min-height: 25vh;
+    margin-left: -30vw;
+    display: grid;
+    grid-template-columns: repeat(3, 30vh);
+    grid-column-gap: 5vh;
+    grid-auto-rows: 35vh;
+    justify-content: center;
+}
+
+.contentItem {
+    width: 30vh;
+    height: 30vh;
+    background: #1D1D1D;
+    border-radius: 20px;
+    font-family: sans-serif;
+    color: lightgray;
+    font-size: 1.5vh;
+    cursor: pointer;
+    transition: 300ms;
+}
+
+.contentItem:hover {
+    background: rgb(41, 41, 41);
+}
+
+.videoThumbnail {
+    width: 100%;
+    height: 50%;
+    border-radius: 20px 20px 0 0;
+}
+
+.videoTitle {
+    padding: 1vh;
+    font-weight: 600;
+    font-size: 1.25vh;
+    color: lightgray;
+}
+
+.views {
+    padding: 1vh;
+    color: rgb(151, 151, 151);
+}
+
+.tags {
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 1vh;
+    font-size: 1.5vh;
+}
+
+.tag {
+    background: var(--dark-blue);
+    margin: 0 2vh 1vh 0;
+    padding: 0.25vh 0.75vh 0.25vh 0.75vh;
+    border-radius: 5px;
+}
