@@ -1,20 +1,20 @@
-import React, {useState, useEffect, useContext} from 'react'
-import styles from '../css/profile.module.css'
-import VideoThumbnail from '../icons/video-thumbnail.png'
-import DeleteIcon from '../icons/delete-icon.png'
-import EditIcon from '../icons/edit-icon.png'
-import GlobalContext from '../context/GlobalContext'
+import React, {useEffect, useContext} from 'react'
+import VideoThumbnail from '../../icons/general/video-thumbnail.png'
 import TimeAgo from 'javascript-time-ago'
 import ReactTimeAgo from 'react-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
-import useAxios from '../api/useAxios'
+import styles from '../../css/user.module.css'
+import { useAxios } from '../../global/Axios'
+import GlobalContext from '../../global/GlobalContext'
+
+
 
 TimeAgo.addDefaultLocale(en)
 
 const ContentItem = ({post}) => {
     return (
         <div className={styles.contentItem}>
-            <img src={VideoThumbnail} className={styles.videoThumbnail} />
+            <img src={VideoThumbnail} alt='video-thumbnail' className={styles.videoThumbnail} />
             <p className={styles.videoTitle}>{post.name}</p>
             <h5 className={styles.views}>{post.views} views • {<ReactTimeAgo date={Date.parse(post.created)} locale="en-US" />}</h5>
 
@@ -31,7 +31,7 @@ const ContentItem = ({post}) => {
     )
 }
 
-const ProfileContent = ({profileProps}) => {
+const UserContent = ({profileProps}) => {
 
     const {user, userContent, setUserContent} = useContext(GlobalContext)
     const api = useAxios()
@@ -64,4 +64,4 @@ const ProfileContent = ({profileProps}) => {
   )
 }
 
-export default ProfileContent
+export default UserContent

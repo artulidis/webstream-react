@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import styles from '../css/app.module.css'
+import styles from '../../../css/layout.module.css'
 
 const SideBarTopics = () => {
 
-    const [topics, setTopics] = useState([1,2,3,4,5,6,1,2,3,4,5,6])
+    const [topics] = useState([1,2,3,4,5,6,1,2,3,4,5,6])
 
   return (
     <div className={styles.topicsContainer}>

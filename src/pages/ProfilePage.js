@@ -1,15 +1,14 @@
 import React from 'react'
-import styles from '../css/profile.module.css'
-import ProfileContent from '../components/ProfileContent'
-import ProfileInfo from '../components/ProfileInfo'
+import UserContent from '../components/User/UserContent'
+import UserInfo from '../components/User/UserInfo'
 
 
 const ProfilePage = () => {
   return (
     <div>
-        <ProfileInfo/>
+        <UserInfo/>
 
-        <ProfileContent />
+        <UserContent />
     </div>
   )
 }

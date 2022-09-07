@@ -1,4 +1,4 @@
-import GlobalContext from "../context/GlobalContext"
+import GlobalContext from "./GlobalContext"
 import React, { useContext } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 

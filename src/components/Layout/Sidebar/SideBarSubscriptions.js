@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import styles from '../css/app.module.css'
-import ProfileImage from '../icons/profile-picture.png'
+import styles from '../../../css/layout.module.css'
+import ProfileImage from '../../../icons/general/profile-picture.png'
 
 const SideBarSubscriptions = () => {
 
-  const [subscribtions, setSubscriptions] = useState([1,2,3,4,5,6])
+  const [subscribtions] = useState([1,2,3,4,5,6])
 
   return (
     <div className={styles.subscriptionContainer}>

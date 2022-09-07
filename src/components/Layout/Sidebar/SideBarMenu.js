@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from '../css/app.module.css'
-import { ReactComponent as CompassIcon } from '../icons/sidebar/compass-icon.svg'
-import { ReactComponent as WatchListIcon } from '../icons/sidebar/watchlist-icon.svg'
-import { ReactComponent as ChannelIcon } from '../icons/sidebar/channel-icon.svg'
-import { ReactComponent as ActivityIcon } from '../icons/sidebar/activity-icon.svg'
-import { ReactComponent as LikedIcon } from '../icons/sidebar/like-icon.svg'
+import styles from '../../../css/layout.module.css'
+import { ReactComponent as CompassIcon } from '../../../icons/sidebar/compass-icon.svg'
+import { ReactComponent as WatchListIcon } from '../../../icons/sidebar/watchlist-icon.svg'
+import { ReactComponent as ChannelIcon } from '../../../icons/sidebar/channel-icon.svg'
+import { ReactComponent as ActivityIcon } from '../../../icons/sidebar/activity-icon.svg'
+import { ReactComponent as LikedIcon } from '../../../icons/sidebar/like-icon.svg'
 
 const SideBarMenu = () => {
   return (

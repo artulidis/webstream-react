@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import LoginForm from '../components/LoginForm'
-import RegisterForm from '../components/RegisterForm'
-import styles from '../css/login.module.css'
+import LoginForm from '../components/Auth/LoginForm'
+import RegisterForm from '../components/Auth/RegisterForm'
+import styles from '../css/auth.module.css'
 
 const LoginPage = () => {
 

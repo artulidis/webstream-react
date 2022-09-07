@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
-import GlobalContext from '../context/GlobalContext'
-import styles from '../css/app.module.css'
+import GlobalContext from '../../../global/GlobalContext'
+import styles from '../../../css/layout.module.css'
 import SideBarMenu from './SideBarMenu'
 import SideBarSubscriptions from './SideBarSubscriptions'
 import SideBarTopics from './SideBarTopics'

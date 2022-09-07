@@ -1,10 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react'
-import styles from '../css/profile.module.css'
-import useAxios from '../api/useAxios'
-import GlobalContext from '../context/GlobalContext'
-import axios from 'axios'
+import React, { useContext, useEffect, useState } from 'react'
+import styles from '../../css/user.module.css'
+import { useAxios } from '../../global/Axios'
+import GlobalContext from '../../global/GlobalContext'
 
-const ProfileInfo = () => {
+const UserInfo = () => {
 
   const { user, userContent, profileInfo, setProfileInfo } = useContext(GlobalContext)
   const api = useAxios()
@@ -39,7 +38,7 @@ const ProfileInfo = () => {
       return (
         <div className={styles.registerAddAvatar}>
           <label className={styles.registerImageLabel} htmlFor={'image-input'}>
-            {isImageSelected ? <img src={imageSelected} className={styles.profilPictureEdit} /> : <img src={profileInfo?.profile_image} className={!isEdit ? styles.profilePicture : styles.profilPictureEdit} />}
+            {isImageSelected ? <img src={imageSelected} alt='selected' className={styles.profilPictureEdit} /> : <img src={profileInfo?.profile_image} alt='profile' className={!isEdit ? styles.profilePicture : styles.profilPictureEdit} />}
           </label>
           <input name={'profile_image'} id='image-input' type='file' accept='image/*' onChange={(e) => handleImageUpload(e)}></input>
         </div>
@@ -47,7 +46,7 @@ const ProfileInfo = () => {
     }
   
   return (
-    <img src={profileInfo?.profile_image} className={!isEdit ? styles.profilePicture : styles.profilPictureEdit} />
+    <img src={profileInfo?.profile_image} alt='profile' className={!isEdit ? styles.profilePicture : styles.profilPictureEdit} />
   )
 }
 
@@ -127,4 +126,4 @@ const ProfileInfo = () => {
   )
 }
 
-export default ProfileInfo
+export default UserInfo

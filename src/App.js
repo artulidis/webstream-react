@@ -2,10 +2,10 @@ import React from 'react';
 import {BrowserRouter as Router, Routes, Route, useRoutes} from 'react-router-dom'
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
-import Layout from './layout/Layout';
-import {GlobalProvider} from './context/GlobalContext';
+import Layout from './global/Layout';
+import {GlobalProvider} from './global/GlobalContext';
 import ProfilePage from './pages/ProfilePage';
-import PrivateRoute from './layout/PrivateRoute';
+import PrivateRoute from './global/PrivateRoute';
 
 function App() {
 

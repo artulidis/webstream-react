@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef, useContext } from 'react'
-import styles from '../css/login.module.css'
+import React, { useState, useContext } from 'react'
+import styles from '../../css/auth.module.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { ReactComponent as PlusIcon } from '../icons/plus-icon.svg'
-import GlobalContext from '../context/GlobalContext'
+import { ReactComponent as PlusIcon } from '../../icons/general/plus-icon.svg'
+import GlobalContext from '../../global/GlobalContext'
 
 const RegisterForm = () => {
 
