@@ -219,14 +219,16 @@ html {
     border-radius: 7px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .menuItem:hover {
     background: var(--dark-blue);
 }
 
-.menuItem span {
+.menuItem span, .loginButton {
     color: white;
+    text-decoration: none;
     font-family: sans-serif;
     font-weight: 600;
     font-size: 1.5vh;

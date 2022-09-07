@@ -6,30 +6,11 @@ import { useNavigate } from 'react-router-dom'
 
 const LoginForm = () => {
 
-  const { user, setUser, authTokens, setAuthTokens } = useContext(GlobalContext)
+  const { user, setUser, authTokens, setAuthTokens, loginUser } = useContext(GlobalContext)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const navigate = useNavigate()
-
-  const loginUser = async (e) => {
-    e.preventDefault()
-    let response = await api.post('api/token/', {
-      username: username,
-      password: password
-    })
-
-    setAuthTokens(response.data)
-    setUser(jwt_decode(response.data.access))
-
-    localStorage.setItem('tokens', JSON.stringify(response.data))
-
-    if(response.status === 200) {
-      navigate('/profile')
-    }
-
-  }
 
   return (
     <>
@@ -42,7 +23,7 @@ const LoginForm = () => {
             <label>password:</label>
             <input type={'password'} name='password' onChange={(e) => setPassword(e.target.value)}></input>
         </div>
-        <button onClick={(e) => loginUser(e)}>login</button>
+        <button onClick={(e) => loginUser(e, username, password)}>login</button>
     </>
   )
 }

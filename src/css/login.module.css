@@ -125,25 +125,43 @@
     margin-top: 1vh;
 }
 
+.registerAddAvatar>input {
+    display: none;
+}
+
+.registerImageLabel {
+    display: flex;
+    min-width: 100% !important;
+    align-items: center;
+    justify-content: space-between;
+}
+
 .registerAddAvatar {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 22.5vh;
+    width: 25vh;
     height: 8vh;
+    /* border: 1px solid green; */
 }
 
-.registerAddIcon {
-    cursor: pointer;
+.registerAddIconContainer {
+    border: 2px solid gray;
+    border-radius: 100%;
+    display: flex;
 }
+
+.registerAddIcon {cursor: pointer;}
 
 .registerAddIcon:hover {
     fill: gray;
-    transition: 1000ms;
 }
 
-.registerAddAvatar label {
-    text-align: left;
+.registerImageFile {
+    border-radius: 100%;
+    padding: 4px;
+    max-width: 6.25vh;
+    cursor: pointer;
 }
 
 .registerBio {
