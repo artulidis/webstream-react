@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LoginForm from '../components/Auth/LoginForm'
 import RegisterForm from '../components/Auth/RegisterForm'
 import styles from '../css/auth.module.css'
 
-const LoginPage = () => {
+const AuthPage = () => {
 
     const loginButton = useRef()
     const registerButton = useRef()
@@ -49,4 +49,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default AuthPage

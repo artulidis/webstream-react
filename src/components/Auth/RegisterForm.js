@@ -1,13 +1,11 @@
 import React, { useState, useContext } from 'react'
 import styles from '../../css/auth.module.css'
-import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { ReactComponent as PlusIcon } from '../../icons/general/plus-icon.svg'
 import GlobalContext from '../../global/GlobalContext'
 
 const RegisterForm = () => {
 
-  const navigate = useNavigate()
   const { loginUser } = useContext(GlobalContext)
 
   const [isImageSelected, setIsImageSelected] = useState(false)
@@ -58,7 +56,7 @@ const RegisterForm = () => {
       "bio": formData.bio
     })
     if(response.status === 200) {
-      loginUser(e, formData.username, formData.password, {profileProps: {registeredUser: 'Holly Bednar'}})
+      loginUser(e, formData.username, formData.password)
     }
   }
 
@@ -91,7 +89,7 @@ const RegisterForm = () => {
         <label className={styles.registerImageLabel} htmlFor={'image-input'}>
         profile picture
         <div className={styles.registerAddIconContainer}>
-        {isImageSelected ? <img src={imageSelected} className={styles.registerImageFile} /> : <PlusIcon className={styles.registerAddIcon } />}
+        {isImageSelected ? <img src={imageSelected} alt='selected' className={styles.registerImageFile} /> : <PlusIcon className={styles.registerAddIcon } />}
         </div>
         </label>
         <input name={'profile_image'} id='image-input' type='file' accept='image/*' onChange={(e) => handleImageUpload(e)}></input>

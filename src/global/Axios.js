@@ -4,12 +4,12 @@ import GlobalContext from '../global/GlobalContext'
 import jwt_decode from "jwt-decode"
 import dayjs from 'dayjs'
 
+const baseURL = 'http://127.0.0.1:8000/'
+
 export const api = axios.create({
-    baseURL: 'http://127.0.0.1:8000/',
+    baseURL,
     headers: {'Content-Type': 'application/json'}
   });
-
-  const baseURL = 'http://127.0.0.1:8000'
 
 
 export const useAxios = () => {
@@ -28,7 +28,7 @@ interceptorInstance.interceptors.request.use(async req => {
 
     if(!isExpired) return req
 
-    const response = await axios.post(`${baseURL}/api/token/refresh/`, {
+    const response = await axios.post(`${baseURL}api/token/refresh/`, {
         refresh: authTokens.refresh
       });
 

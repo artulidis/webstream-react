@@ -10,9 +10,10 @@ export const GlobalProvider = ({children}) => {
   const [open, setOpen] = useState(false);
   const [authTokens, setAuthTokens] = useState(() => localStorage.getItem('tokens') ? JSON.parse(localStorage.getItem('tokens')) : null)
   const [user, setUser] = useState(() => localStorage.getItem('tokens') ? jwt_decode(localStorage.getItem('tokens')) : null)
-  const [userContent, setUserContent] = useState(null)
+  const [profileContent, setProfileContent] = useState(null)
   const [profileInfo, setProfileInfo] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [isEdit, setIsEdit] = useState(false)
+  const [profile_image, setProfile_Image] = useState(null)
   const navigate = useNavigate()
 
 
@@ -27,7 +28,7 @@ export const GlobalProvider = ({children}) => {
   }
 
 
-  const loginUser = async (e, username, password, {profileProps}={}) => {
+  const loginUser = async (e, username, password) => {
     e.preventDefault()
     let response = await api.post('api/token/', {
       username: username,
@@ -37,7 +38,7 @@ export const GlobalProvider = ({children}) => {
     setUser(jwt_decode(response.data.access))
     localStorage.setItem('tokens', JSON.stringify(response.data))
     if(response.status === 200) {
-      navigate('/profile', {...profileProps})
+      navigate('/profile')
     }
   }
 
@@ -53,9 +54,11 @@ export const GlobalProvider = ({children}) => {
     open, setOpen,
     authTokens, setAuthTokens,
     user, setUser,
-    userContent, setUserContent,
+    profileContent, setProfileContent,
     loginUser, logoutUser,
-    profileInfo, setProfileInfo
+    profileInfo, setProfileInfo,
+    profile_image, setProfile_Image,
+    isEdit, setIsEdit
   }
 
   return (

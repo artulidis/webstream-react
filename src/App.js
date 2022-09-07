@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route, useRoutes} from 'react-router-dom'
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/AuthPage';
 import MainPage from './pages/MainPage';
-import Layout from './global/Layout';
+import LayoutPage from './pages/LayoutPage';
 import {GlobalProvider} from './global/GlobalContext';
 import ProfilePage from './pages/ProfilePage';
 import PrivateRoute from './global/PrivateRoute';
@@ -13,7 +13,7 @@ function App() {
     <Router>
       <GlobalProvider>
       <Routes>
-        <Route path='/' element={<Layout/>}>
+        <Route path='/' element={<LayoutPage/>}>
 
           <Route path='/' exact element={<MainPage/>}/>
           <Route path='/login' element={<LoginPage/>} />

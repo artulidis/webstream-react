@@ -15,7 +15,7 @@ const Profile = (props) => {
 
     const getProfileInfo = async () => {
       try {
-        let profile_info = await api.get(`/api/user/${user.username}`)
+        let profile_info = await api.get(`api/user/${user.username}`)
         setProfileInfo(profile_info.data)   
       } catch(error) {
         console.log("SOMETHING WENT WRONG")
