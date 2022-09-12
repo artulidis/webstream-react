@@ -3,12 +3,24 @@ import TimeAgo from 'javascript-time-ago'
 import ReactTimeAgo from 'react-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
 import styles from '../../css/profile.module.css'
+import { Link } from 'react-router-dom'
 
 TimeAgo.addDefaultLocale(en)
 
 const ContentItem = ({post}) => {
+
+    const slugify = (name) => {
+    name = name
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+    return name
+    }
+
     return (
-        <div className={styles.contentItem}>
+        <Link to={`/videos/${post.user}/${slugify(post.name)}/${post.id}`} className={styles.contentItem}>
             <img src={VideoThumbnail} alt='video-thumbnail' className={styles.videoThumbnail} />
             <p className={styles.videoTitle}>{post.name}</p>
             <h5 className={styles.views}>{post.views} views • {<ReactTimeAgo date={Date.parse(post.created)} locale="en-US" />}</h5>
@@ -22,7 +34,7 @@ const ContentItem = ({post}) => {
                 }
 
             </div>
-        </div>
+        </Link>
     )
 }
 

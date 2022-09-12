@@ -14,9 +14,10 @@ export const GlobalProvider = ({children}) => {
   const [profileInfo, setProfileInfo] = useState(null)
   const [isEdit, setIsEdit] = useState(false)
   const [profile_image, setProfile_Image] = useState(null)
+  const [error, setError] = useState(null)
+  const [isError, setIsError] = useState(false)
+
   const navigate = useNavigate()
-
-
 
   const logoutUser = () => {
     setUser(null)
@@ -27,21 +28,31 @@ export const GlobalProvider = ({children}) => {
     navigate('/login')
   }
 
-
   const loginUser = async (e, username, password) => {
-    e.preventDefault()
-    let response = await api.post('api/token/', {
+    try {
+      e.preventDefault()
+      let response = await api.post('api/token/', {
       username: username,
       password: password
-    })
-    setAuthTokens(response.data)
-    setUser(jwt_decode(response.data.access))
-    localStorage.setItem('tokens', JSON.stringify(response.data))
-    if(response.status === 200) {
+      })
+      setAuthTokens(response.data)
+      setUser(jwt_decode(response.data.access))
+      setIsError(false)
+      setError(null)
+      localStorage.setItem('tokens', JSON.stringify(response.data))
       navigate('/profile')
+    } catch(error) {
+        if(!isError) {
+          setIsError(true)
+          setError(error.response.statusText)
+        }
+
+        setTimeout(()=> {
+          setIsError(false)
+          setError(null)
+        },2300)
     }
   }
-
 
   useEffect(()=> {
     if(authTokens) {
@@ -58,7 +69,9 @@ export const GlobalProvider = ({children}) => {
     loginUser, logoutUser,
     profileInfo, setProfileInfo,
     profile_image, setProfile_Image,
-    isEdit, setIsEdit
+    isEdit, setIsEdit,
+    error, setError,
+    isError, setIsError
   }
 
   return (

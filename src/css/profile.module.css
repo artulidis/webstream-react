@@ -139,6 +139,7 @@
 .contentItem {
     width: 30vh;
     height: 30vh;
+    text-decoration: none;
     background: #1D1D1D;
     border-radius: 20px;
     font-family: sans-serif;

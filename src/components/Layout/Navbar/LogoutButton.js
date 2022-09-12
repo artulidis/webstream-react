@@ -5,9 +5,13 @@ import GlobalContext from "../../../global/GlobalContext"
 const LogoutButton = () => {
 
     const {logoutUser} = useContext(GlobalContext)
+
+    const userLogout = () => {
+      logoutUser()
+    } 
   
       return (
-        <div onClick={logoutUser} className={styles.menuItem}>
+        <div onClick={userLogout} className={styles.menuItem}>
           <span>Logout</span>
         </div>
       )

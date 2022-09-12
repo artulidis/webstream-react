@@ -1,28 +1,15 @@
 import React, {useEffect, useContext} from 'react'
+import { useParams } from 'react-router-dom'
 import styles from '../../css/profile.module.css'
 import { useAxios } from '../../global/Axios'
 import GlobalContext from '../../global/GlobalContext'
 import ContentItem from './ContentItem'
 
-const ProfileContent = () => {
+const ProfileContent = (props) => {
 
-    const {user, profileContent, setProfileContent} = useContext(GlobalContext)
+    const {user, profileContent, setProfileContent, profileInfo} = useContext(GlobalContext)
     const api = useAxios()
-
-    useEffect(()=> {
-        getProfileContent()
-      },[])
-
-    const getProfileContent = async () => {
-    try {
-        let videos = await api.get(`api/videos/${user.user_id}`)
-        console.log(videos.data)
-        setProfileContent(videos.data)
-    } 
-    catch(error) {
-        console.log("SOMETHING WENT WRONG")
-    }
-    }
+    const params = useParams()
 
 
   return (

@@ -3,10 +3,11 @@ import styles from '../../css/auth.module.css'
 import axios from 'axios'
 import { ReactComponent as PlusIcon } from '../../icons/general/plus-icon.svg'
 import GlobalContext from '../../global/GlobalContext'
+import ErrorMessage from './ErrorMessage'
 
 const RegisterForm = () => {
 
-  const { loginUser } = useContext(GlobalContext)
+  const { loginUser, isError, setIsError, error, setError } = useContext(GlobalContext)
 
   const [isImageSelected, setIsImageSelected] = useState(false)
   const [imageSelected, setImageSelected] = useState('')
@@ -43,26 +44,45 @@ const RegisterForm = () => {
 
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    let response = await axios.postForm('http://127.0.0.1:8000/api/users/', {
-      "username": formData.username,
-      "password": formData.password,
-      "email": formData.email,
-      "full_name": formData.full_name,
-      "profile_image": profile_image,
-      "followers": 0,
-      "following": 0,
-      "bio": formData.bio
-    })
-    if(response.status === 200) {
+    try {
+      e.preventDefault()
+      await axios.postForm('http://127.0.0.1:8000/api/users/', {
+        "username": formData.username,
+        "password": formData.password,
+        "email": formData.email,
+        "full_name": formData.full_name,
+        "profile_image": profile_image,
+        "followers": 0,
+        "following": 0,
+        "bio": formData.bio
+      })
       loginUser(e, formData.username, formData.password)
+    } catch(error) {
+      if(!isError) {
+        setIsError(true)
+        let users = await axios.get('http://127.0.0.1:8000/api/users/')
+        users.data.forEach((user)=> {
+          if(user.username === formData.username) {
+            setError("Invalid Username")
+          } else {
+            setError("Invalid Email")
+          }
+        })
+
+      }
+
+      setTimeout(()=> {
+        setIsError(false)
+        setError(null)
+      },2300)
     }
+
   }
 
 
   return (
     <div className={styles.registerFormContainer}>
+      {isError ? <ErrorMessage error={error}/> : null}
       <div className={styles.registerTopForms}>
         <div>
             <label className={styles.registerLabel}>full name</label>

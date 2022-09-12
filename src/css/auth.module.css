@@ -4,6 +4,17 @@
     --light-blue: #5ad6f7;
 }  
 
+.dormant {
+    background: white !important;
+    color: gray !important;
+}
+
+.active {
+    background: var(--dark-blue) !important;
+    color: white !important;
+}
+
+
 .loginContainer {
     background: #414141;
     width: 70vh;
@@ -199,12 +210,27 @@
     right: 0;
 }
 
-.dormant {
-    background: white !important;
-    color: gray !important;
+@keyframes errorMessage {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
-.active {
-    background: var(--dark-blue) !important;
-    color: white !important;
+.errorMessage {
+    width: 70vh;
+    height: 5vh;
+    background: #C60101 ;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -17vh;
+    left: 50%;
+    margin-left: -35vh;
+    animation: errorMessage 0.5s 1.5s ease-out forwards;
 }

@@ -1,13 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import styles from '../../css/profile.module.css'
 import { useAxios } from '../../global/Axios'
 import GlobalContext from '../../global/GlobalContext'
 import ProfileImage from './ProfileImage'
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
 
-  const { user, profile_image, profileContent, isEdit, setIsEdit, profileInfo, setProfileInfo } = useContext(GlobalContext)
+  const { user, profile_image, profileContent, isEdit, setIsEdit, profileInfo, setProfileInfo, getProfileInfo } = useContext(GlobalContext)
   const api = useAxios()
+  const params = useParams()
 
   const [formData, setFormData] = useState({
     username: null,
@@ -16,25 +18,12 @@ const ProfileInfo = () => {
   })
 
   useEffect(()=> {
-    getProfileInfo()
-  },[])
-
-  useEffect(()=> {
     setFormData({
       username: profileInfo?.username,
       full_name: profileInfo?.full_name,
       bio: profileInfo?.bio
     })
   },[profileInfo])
-
-  const getProfileInfo = async () => {
-    try {
-      let profile_content = await api.get(`/api/user/${user.username}`)
-      setProfileInfo(profile_content.data)
-    } catch(error) {
-      console.log(error)
-    }
-  }
 
   const handleProfileEdit = (e) => {
     setFormData({
@@ -60,7 +49,7 @@ const ProfileInfo = () => {
         "bio": formData.bio
       })
       if(response.status === 200) {
-        getProfileInfo()
+        props.getProfile()
         setIsEdit(!isEdit)
       }
     }
@@ -73,7 +62,7 @@ const ProfileInfo = () => {
       <div className={styles.profileInfo}>
           <div className={styles.profileInfoTop}>
               <h4 className={styles.usernameLabel}>{profileInfo?.username}</h4> 
-              <button className={!isEdit ? styles.editProfile : styles.editProfileEdit} onClick={(e)=> handleSubmit(e)}>{!isEdit ? 'Edit Profile' : 'Apply'}</button>
+              {profileInfo?.username === user?.username ? <button className={!isEdit ? styles.editProfile : styles.editProfileEdit} onClick={(e)=> handleSubmit(e)}>{!isEdit ? 'Edit Profile' : 'Apply'}</button> : null}
           </div>
           
           <div className={styles.statContainer}>
