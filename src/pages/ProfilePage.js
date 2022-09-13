@@ -11,38 +11,24 @@ const ProfilePage = () => {
   const { user, profileInfo, setProfileInfo, setProfileContent } = useContext(GlobalContext)
   const params = useParams()
   const api = useAxios()
-
-  useEffect(()=> {
-    getProfileContent()
-  },[])
-
-  const getProfileContent = async () => {
-    try {
-      
-    } 
-    catch(error) {
-        console.log(error)
-    }
-  }
   
-
   useEffect(()=> {
     getProfile()
   },[])
 
-const getProfile = async () => {
-  try {
-    let profile_info = await api.get(`/api/user/${params.username === undefined ? user.username : params.username}`)
-    setProfileInfo(profile_info.data)
+  const getProfile = async () => {
+    try {
+      let profile_info = await api.get(`/api/user/${params.username === undefined ? user.username : params.username}`)
+      setProfileInfo(profile_info.data)
 
-    let videos = await api.get(`api/videos/${params.username === undefined ? user.user_id : profile_info.data.id}`)
-    console.log(videos.data)
-    setProfileContent(videos.data)
+      let videos = await api.get(`api/videos/${params.username === undefined ? user.user_id : profile_info.data.id}`)
+      console.log(videos.data)
+      setProfileContent(videos.data)
 
-  } catch(error) {
-    console.log(error)
+    } catch(error) {
+      console.log(error)
+    }
   }
-}
 
   return (
     <div>
