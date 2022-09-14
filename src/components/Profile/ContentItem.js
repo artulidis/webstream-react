@@ -9,18 +9,8 @@ TimeAgo.addDefaultLocale(en)
 
 const ContentItem = ({post}) => {
 
-    const slugify = (name) => {
-    name = name
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-    return name
-    }
-
     return (
-        <Link to={`/videos/${post.user}/${slugify(post.name)}/${post.id}`} className={styles.contentItem}>
+        <Link to={`/videos/${post.user}/${post.id}`} className={styles.contentItem}>
             <img src={VideoThumbnail} alt='video-thumbnail' className={styles.videoThumbnail} />
             <p className={styles.videoTitle}>{post.name}</p>
             <h5 className={styles.views}>{post.views} views • {<ReactTimeAgo date={Date.parse(post.created)} locale="en-US" />}</h5>

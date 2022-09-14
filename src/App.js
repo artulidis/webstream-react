@@ -27,7 +27,7 @@ function App() {
 
           <Route path='/profile/:username' element={<ProfilePage />}></Route>
 
-          <Route path='/videos/:username/:name/:id' element={<VideoPage />}></Route>
+          <Route path='/videos/:username/:id' element={<VideoPage />}></Route>
 
         </Route>
       </Routes>
