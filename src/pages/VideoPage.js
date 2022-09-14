@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import styles from '../css/video.module.css'
 import GlobalContext from '../global/GlobalContext'
 import Chat from '../components/Video/Chat'
@@ -7,6 +7,7 @@ import ChatMessage from '../components/Video/ChatMessage'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import ReconnectingWebSocket from 'reconnecting-websocket';
+import VideoJS from '../components/Video/VideoJS'
 
 const VideoPage = () => {
 
@@ -52,11 +53,10 @@ const VideoPage = () => {
     }
   }
 
+
   return (
     <div>
-      <Video>
-        
-      </Video>
+      <VideoJS />
 
       <Chat>
         <div className={styles.chatHeader}>stream chat</div>
@@ -69,7 +69,6 @@ const VideoPage = () => {
           }
         </div>
         <MessageInput handleSubmit={handleSubmit} input={input} setInput={setInput} />
-
       </Chat>
     </div>
   )

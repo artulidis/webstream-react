@@ -6,11 +6,13 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "@videojs/themes": "^1.0.1",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
     "dayjs": "^1.11.5",
     "javascript-time-ago": "^2.5.7",
     "jwt-decode": "^3.1.2",
+    "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -19,6 +21,9 @@
     "react-time-ago": "^7.2.1",
     "react-transition-group": "^4.4.5",
     "reconnecting-websocket": "^4.4.0",
+    "sass": "^1.54.9",
+    "videojs-contrib-quality-levels": "^2.2.0",
+    "videojs-http-source-selector": "^1.1.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -46,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@iconify/react": "^3.2.2"
+    "@iconify/react": "^3.2.2",
+    "video.js": "^7.20.2"
   }
 }
