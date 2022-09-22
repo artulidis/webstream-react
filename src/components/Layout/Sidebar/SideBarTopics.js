@@ -1,15 +1,25 @@
-import React, {useState} from 'react'
+import axios from 'axios'
+import React, {useEffect, useState} from 'react'
 import styles from '../../../css/layout.module.css'
 
 const SideBarTopics = () => {
 
-    const [topics] = useState([1,2,3,4,5,6,1,2,3,4,5,6])
+    const [topics, setTopics] = useState([])
+
+    useEffect(() => {
+      getTopics()
+    },[])
+
+    const getTopics = async () => {
+      let response = await axios.get('http://127.0.0.1:8000/api/topics/')
+      setTopics(response.data) 
+    }
 
   return (
     <div className={styles.topicsContainer}>
     {
         topics.map((topic, index) => (
-            <h4 key={index} className={styles.topic}>#action</h4>
+            <h4 key={index} className={styles.topic}>#{topic?.name}</h4>
         ))
     }
     </div>

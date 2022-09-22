@@ -13,7 +13,7 @@ import GlobalContext from '../global/GlobalContext'
 
 const LayoutPage = () => {
 
-  const { user } = useContext(GlobalContext)
+  const { user, following } = useContext(GlobalContext)
 
   return (
     <div>
@@ -32,7 +32,7 @@ const LayoutPage = () => {
       <SideBarMenu />
         <div className={styles.sideBarDivider}></div>
 
-        { user ?
+        { user && following.length !== 0 ?
           <>
               <h3 className={styles.subscriptionsHeader}>subscribtions</h3>
               <SideBarSubscriptions />

@@ -1,19 +1,18 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import styles from '../../../css/layout.module.css'
-import ProfileImage from '../../../icons/general/profile-picture.png'
+import GlobalContext from '../../../global/GlobalContext'
+import SubscriptionItem from './SubscriptionItem'
+
 
 const SideBarSubscriptions = () => {
 
-  const [subscribtions] = useState([1,2,3,4,5,6])
+  const { following } = useContext(GlobalContext)
 
   return (
     <div className={styles.subscriptionContainer}>
     {
-        subscribtions.map((subscription, index)=> (
-            <div key={index} className={styles.subscription}>
-                <img src={ProfileImage} className={styles.subscriptionProfilePicture}/>
-                <h4>jekulidi894</h4>
-            </div>
+        following.map((subscription, index)=> (
+            <SubscriptionItem key={index} subscription={subscription} />
         ))
     }
     </div>

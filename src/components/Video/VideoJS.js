@@ -2,11 +2,10 @@ import React, { useEffect, useRef } from 'react'
 import videojs from 'video.js';
 import "video.js/dist/video-js.css";
 import styles from '../../css/video.module.css'
-import video from '../../icons/general/video.mp4'
 import '../../css/videojs.scss'
+import '@videojs/themes/dist/sea/index.css';
 import "videojs-contrib-quality-levels";
 import "videojs-http-source-selector";
-
 
 export const VideoJS = () => {
 
@@ -14,7 +13,7 @@ export const VideoJS = () => {
   const demo = useRef()
 
   const options = {
-    muted: true,
+    muted: false,
     language: "en",
     preload: "auto",
     fluid: true,
@@ -30,7 +29,8 @@ export const VideoJS = () => {
       useBandwidthFromLocalStorage: true
     },
     controlBar: {
-      pictureInPictureToggle: false
+      pictureInPictureToggle: false,
+      textTrackSettings: false
     }
   };
 
@@ -43,21 +43,20 @@ export const VideoJS = () => {
   
   return (
     <div ref={demo} className={styles.demo}>
-      <div className={styles.center}>
         <video
           ref={player}
           id="player"
-          className={`${styles.videoJS} video-js`}
+          className={`${styles.videoJS} video-js vjs-theme-sea`} 
           controls
           playsInline
           preload="auto"
+          data-setup="{}"
         >
           <source
-            src={video}
-            type="video/mp4"
+            src="https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+            type='application/x-mpegURL'
           />
         </video>
-      </div>
     </div>
   );
 }

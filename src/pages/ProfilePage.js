@@ -34,7 +34,7 @@ const ProfilePage = () => {
     <div>
         <ProfileInfo getProfile={getProfile} />
 
-        <ProfileContent user_id={params.username === undefined ? user.user_id : profileInfo?.id} />
+        <ProfileContent username={params.username === undefined ? undefined : profileInfo?.username} />
     </div>
   )
 }

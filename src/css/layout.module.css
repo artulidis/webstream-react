@@ -98,7 +98,12 @@ html {
 
 .subscriptionContainer {
     overflow-y: scroll;
-    height: 27.5vh;
+    height: auto;
+    max-height: 27.5vh;
+}
+
+.subscriptionLink {
+    text-decoration: none;
 }
 
 .subscription {
@@ -108,6 +113,7 @@ html {
     border-radius: 10px;
     margin: 0vh 0 2vh 0;
     transition: 300ms;
+    color: white;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -144,10 +150,10 @@ html {
     color: white;
     font-size: 1.5vh;
     width: 100%;
-    text-align: center;
+    text-align: left;
     background: var(--dark-blue);
     margin-bottom: 2vh;
-    padding: 0.5vh 0 0.5vh 0;
+    padding: 0.5vh 0 0.5vh 1vh;
     border-radius: 20px;
     box-shadow: 1px 1px white;
     cursor: pointer;

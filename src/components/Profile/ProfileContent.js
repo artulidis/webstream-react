@@ -1,25 +1,30 @@
-import React, {useEffect, useContext} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import styles from '../../css/profile.module.css'
 import { useAxios } from '../../global/Axios'
 import GlobalContext from '../../global/GlobalContext'
 import ContentItem from './ContentItem'
+import {ReactComponent as AddContent} from '../../icons/general/addContent.svg'
+import AddContentPopup from './AddContentPopup'
 
 const ProfileContent = (props) => {
 
-    const {user, profileContent, setProfileContent, profileInfo} = useContext(GlobalContext)
-    const api = useAxios()
-    const params = useParams()
+    const [isAdding, setIsAdding] = useState(false)
 
+    const {profileContent, isEdit} = useContext(GlobalContext)
 
   return (
+    <>
+    { isAdding ? <AddContentPopup setIsAdding={setIsAdding} /> : null}
     <div className={styles.profileContent}>
+      { props.username === undefined && !isEdit ? <div className={styles.addButton}><AddContent onClick={() => setIsAdding(true)} /></div> : null }
         {
             profileContent?.sort((a,b)=> a.created < b.created).map((post, index) => (
                  <ContentItem post={post} key={index} />
             ))
         }
     </div>
+    </>
   )
 }
 

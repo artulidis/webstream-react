@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styles from '../../css/profile.module.css'
@@ -7,9 +8,8 @@ import ProfileImage from './ProfileImage'
 
 const ProfileInfo = (props) => {
 
-  const { user, profile_image, profileContent, isEdit, setIsEdit, profileInfo, setProfileInfo, getProfileInfo } = useContext(GlobalContext)
+  const { user, profile_image, profileContent, isEdit, setIsEdit, profileInfo, following } = useContext(GlobalContext)
   const api = useAxios()
-  const params = useParams()
 
   const [formData, setFormData] = useState({
     username: null,
@@ -38,14 +38,13 @@ const ProfileInfo = (props) => {
       setIsEdit(!isEdit)
     } else {
       e.preventDefault()
-      let response = await api.putForm(`/api/user/${user.username}`, {
+      let response = await api.putForm(`/api/user/${user.username}/`, {
         "username": formData.username,
         "password": profileInfo?.password,
         "email": profileInfo?.email,
         "full_name": formData.full_name,
         "profile_image": profile_image,
         "followers": profileInfo?.followers,
-        "following": profileInfo?.following,
         "bio": formData.bio
       })
       if(response.status === 200) {
@@ -68,7 +67,7 @@ const ProfileInfo = (props) => {
           <div className={styles.statContainer}>
               <div><h4>{profileContent ? profileContent.length : 0}</h4><span>posts</span></div>
               <div><h4>{profileInfo?.followers}</h4><span>followers</span></div>
-              <div><h4>{profileInfo?.following}</h4><span>following</span></div>
+              <div><h4>{following.length}</h4><span>following</span></div>
           </div>
 
           <div className={styles.bioContainer}>

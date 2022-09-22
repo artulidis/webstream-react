@@ -15,18 +15,8 @@ const SideBarMenu = () => {
         </div>
 
         <div className={styles.sideBarItem}>
-            <WatchListIcon className={styles.sideBarIcon} />
-            <h4 className={styles.sideBarHeader}>Watch List</h4>
-        </div>
-
-        <div className={styles.sideBarItem}>
             <ChannelIcon className={styles.sideBarIcon} />
             <h4 className={styles.sideBarHeader}>My Channel</h4>
-        </div>
-
-        <div className={styles.sideBarItem}>
-            <ActivityIcon className={styles.sideBarIcon} />
-            <h4 className={styles.sideBarHeader}>Activity</h4>
         </div>
 
         <div className={styles.sideBarItem}>

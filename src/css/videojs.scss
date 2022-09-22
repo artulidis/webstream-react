@@ -1,105 +1,144 @@
-$color-primary: #95c01f !default;
-$color-secondary: #2315FF !default;
-$border-radius: .5em !default;
+/*
+  Player Skin Designer for Video.js
+  http://videojs.com
 
-@keyframes rotate{
-  to{ transform: rotate(360deg); }
+  To customize the player skin edit 
+  the CSS below. Click "details" 
+  below to add comments or questions.
+  This file uses some SCSS. Learn more  
+  at http://sass-lang.com/guide)
+
+  This designer can be linked to at:
+  https://codepen.io/heff/pen/EarCt/left/?editors=010
+*/
+
+// The following are SCSS variables to automate some of the values.
+// But don't feel limited by them. Change/replace whatever you want. 
+
+// The color of icons, text, and the big play button border.
+// Try changing to #0f0
+$primary-foreground-color: #fff; // #fff default
+
+// The default color of control backgrounds is mostly black but with a little
+// bit of blue so it can still be seen on all-black video frames, which are common.
+// Try changing to #900
+$primary-background-color: #2B333F;  // #2B333F default
+
+// Try changing to true
+$center-big-play-button: false; // true default
+
+.video-js {
+  /* The base font size controls the size of everything, not just text.
+     All dimensions use em-based sizes so that the scale along with the font size.
+     Try increasing it to 15px and see what happens. */
+  font-size: 10px;
+
+  /* The main font color changes the ICON COLORS as well as the text */
+  color: $primary-foreground-color;
 }
 
-.video-js.vjs-lime {
-    border-radius: $border-radius;
-    .vjs-big-play-button {
-        width: 2em;
-        height: 2em;
-        line-height: 1.9em;
-        border-radius: 1em;
-        left: calc(50% - 1em);
-        top: calc(50% - 1em);
-        backdrop-filter: blur(4px);
-        background-color: rgba(0,0,0,.6);
-        border: 2px solid $color-primary;
-        color: $color-primary;
-    }
+/* The "Big Play Button" is the play button that shows before the video plays.
+   To center it set the align values to center and middle. The typical location
+   of the button is the center, but there is trend towards moving it to a corner
+   where it gets out of the way of valuable content in the poster image.*/
+.vjs-default-skin .vjs-big-play-button {
+  /* The font size is what makes the big play button...big. 
+     All width/height values use ems, which are a multiple of the font size.
+     If the .video-js font-size is 10px, then 3em equals 30px.*/
+  font-size: 3em;
 
-    &:hover,
-    &:focus {
-        .vjs-big-play-button {
-            backdrop-filter: blur(4px);
-            background-color: rgba(40,40,40,.6);
-            border: 2px solid $color-primary;
-            color: $color-primary;
-        }
-    }
+  /* We're using SCSS vars here because the values are used in multiple places.
+     Now that font size is set, the following em values will be a multiple of the
+     new font size. If the font-size is 3em (30px), then setting any of
+     the following values to 3em would equal 30px. 3 * font-size. */
+  $big-play-width: 3em; 
+  /* 1.5em = 45px default */
+  $big-play-height: 1.5em;
 
-    .vjs-loading-spinner {
-        border: 3px solid rgba(0,0,0, 0.6);
-        width: 45px;
-        height: 45px;
-        &:before,
-        &:after {
-            margin: -3px;
-            animation: rotate .8s linear infinite;
-            border-top-color: $color-primary;
-        }
-        &:after {
-            display: none;
-            border-top-color: $color-secondary;
-        }
-    }
+  line-height: $big-play-height;
+  height: $big-play-height;
+  width: $big-play-width;
 
-    button:focus,
-    .vjs-menu-item:focus {
-        outline: none;
-        color: $color-primary;
-    }
+  /* 0.06666em = 2px default */
+  border: 0.06666em solid $primary-foreground-color;
+  /* 0.3em = 9px default */
+  border-radius: 0.3em;
 
-    .vjs-control-bar {
-        height: 5em;
-        padding-top: 2em;
-        background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 35%, rgba(0,0,0,0) 100%);
-        border-bottom-left-radius: $border-radius;
-        border-bottom-right-radius: $border-radius;
-    }
+  @if $center-big-play-button {
+    /* Align center */
+    left: 50%;
+    top: 50%;
+    margin-left: -($big-play-width / 2);
+    margin-top: -($big-play-height / 2);   
+  } @else {
+    /* Align top left. 0.5em = 15px default */
+    left: 0.5em;
+    top: 0.5em;
+  }
+}
+/* The default color of control backgrounds is mostly black but with a little
+   bit of blue so it can still be seen on all-black video frames, which are common. */
+.video-js .vjs-control-bar,
+.video-js .vjs-big-play-button,
+.video-js .vjs-menu-button .vjs-menu-content {
+  /* IE8 - has no alpha support */
+  background-color: $primary-background-color;
+  /* Opacity: 1.0 = 100%, 0.0 = 0% */
+  background-color: rgba($primary-background-color, 0.7);
+}
 
-    button.vjs-icon-cog {
-        font-size: 1.3em;
-    }
+// Make a slightly lighter version of the main background
+// for the slider background.
+$slider-bg-color: lighten($primary-background-color, 33%);
 
-    .vjs-menu-button-popup .vjs-menu .vjs-menu-content {
-        background-color: rgba(0,0,0,.6);
-        border-radius: 0.5em;
-        backdrop-filter: blur(4px);
-    }
+/* Slider - used for Volume bar and Progress bar */
+.video-js .vjs-slider {
+  background-color: $slider-bg-color;
+  background-color: rgba($slider-bg-color, 0.5);
+}
 
-    video {
-        border-radius: $border-radius;
-        &:focus {
-            outline: none;
-        }
-    }
+/* The slider bar color is used for the progress bar and the volume bar
+   (the first two can be removed after a fix that's coming) */
+.video-js .vjs-volume-level,
+.video-js .vjs-play-progress,
+.video-js .vjs-slider-bar {
+  background: $primary-foreground-color;
+}
 
-    .vjs-slider {
-        background-color: rgba(255, 255, 255, 0.3);
-        border-radius: 10px;
-    }
+/* The main progress bar also has a bar that shows how much has been loaded. */
+.video-js .vjs-load-progress {
+  /* For IE8 we'll lighten the color */
+  background: lighten($slider-bg-color, 25%);
+  /* Otherwise we'll rely on stacked opacities */
+  background: rgba($slider-bg-color, 0.5);
+}
 
-    .vjs-progress-holder {
-        .vjs-load-progress {
-            background-color: $color-primary;
-            transition: width .15s linear;
-        }
-        .vjs-play-progress,
-        .vjs-load-progress,
-        .vjs-load-progress > div {
-            border-radius: 10px;
-        }
-    }
+/* The load progress bar also has internal divs that represent
+   smaller disconnected loaded time ranges */
+.video-js .vjs-load-progress div {
+  /* For IE8 we'll lighten the color */
+  background: lighten($slider-bg-color, 50%);
+  /* Otherwise we'll rely on stacked opacities */
+  background: rgba($slider-bg-color, 0.75);
+}
 
-    .vjs-menu li.vjs-menu-item:focus,
-    .vjs-menu li.vjs-menu-item:hover,
-    .js-focus-visible .vjs-menu li.vjs-menu-item:hover {
-        &:not(.vjs-selected) {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-    }
+.vjs-subs-caps-button, .vjs-audio-button {
+    display: none !important;
+}
+
+.vjs-menu-content {
+    background: #505050 !important;
+    color: white;
+}
+
+.vjs-menu-item:hover {
+    background: #488697 !important;
+}
+
+.vjs-icon-cog::before {
+     content: url('../icons/general/hd-icon.svg');
+}
+
+.vjs-icon-cog:hover::before {
+     content: url('../icons/general/hd-icon-hover.svg');
 }
