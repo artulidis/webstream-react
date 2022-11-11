@@ -14,7 +14,7 @@ const ProfilePage = () => {
   
   useEffect(()=> {
     getProfile()
-  },[])
+  },[params.username])
 
   const getProfile = async () => {
     try {

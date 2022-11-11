@@ -109,7 +109,7 @@ const RegisterForm = () => {
         <label className={styles.registerImageLabel} htmlFor={'image-input'}>
         profile picture
         <div className={styles.registerAddIconContainer}>
-        {isImageSelected ? <img src={imageSelected} alt='selected' className={styles.registerImageFile} /> : <PlusIcon className={styles.registerAddIcon } />}
+          {isImageSelected ? <img src={imageSelected} alt='selected' className={styles.registerImageFile} /> : <PlusIcon className={styles.registerAddIcon } />}
         </div>
         </label>
         <input name={'profile_image'} id='image-input' type='file' accept='image/*' onChange={(e) => handleImageUpload(e)}></input>

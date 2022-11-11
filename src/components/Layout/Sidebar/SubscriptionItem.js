@@ -1,9 +1,12 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from '../../../css/layout.module.css'
 import { Link } from 'react-router-dom'
+import GlobalContext from '../../../global/GlobalContext'
 
-const SubscriptionItem = ({subscription, index}) => {
+const SubscriptionItem = ({subscription, index, refs}) => {
+
+    const { toggle } = useContext(GlobalContext)
 
     const [user, setUser] = useState(null)
 
@@ -17,7 +20,7 @@ const SubscriptionItem = ({subscription, index}) => {
     }
 
   return (
-    <Link to={`/profile/${user?.username}`} className={styles.subscriptionLink}>
+    <Link to={`/profile/${user?.username}`} className={styles.subscriptionLink} onClick={() => refs !== undefined ? toggle(refs) : null}>
         <div key={index} className={styles.subscription}>
             <img src={user?.profile_image} className={styles.subscriptionProfilePicture}/>
             <h4>{user?.username}</h4>

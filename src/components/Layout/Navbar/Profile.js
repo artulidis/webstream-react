@@ -6,7 +6,7 @@ import ProfileImage from '../../../icons/general/profile-avatar.png'
 
 const Profile = (props) => {
     
-    const { user, open, setOpen, profileInfo } = useContext(GlobalContext)
+    const { user, toggle, open, setOpen, isSubscriptionOpen, setIsSubscriptionOpen, isTopicOpen, setIsTopicOpen, profileInfo } = useContext(GlobalContext)
     const [myProfile, setMyProfile] = useState(null)
     const api = useAxios()
 
@@ -25,6 +25,16 @@ const Profile = (props) => {
       } catch(error) {
         console.log(error)
       }
+    }
+
+    if(open && (isSubscriptionOpen || isTopicOpen)) {
+        if(isSubscriptionOpen) {
+          props.refs[0].current.style.display = "none"
+          setIsSubscriptionOpen(!isSubscriptionOpen)
+        } else if(isTopicOpen) {
+          props.refs[1].current.style.display = "none"
+          setIsTopicOpen(!isTopicOpen)
+        }
     }
   
     return (

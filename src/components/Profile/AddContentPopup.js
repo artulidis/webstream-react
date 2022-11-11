@@ -1,30 +1,31 @@
 import React, {useState, useEffect, useRef} from 'react'
 import styles from '../../css/profile.module.css'
-import {ReactComponent as CloseIcon} from '../../icons/general/close-icon.svg' 
+import {ReactComponent as CloseIcon} from '../../icons/general/close-icon.svg'
+import AddContentForm from './AddContentForm'
 
 export function useUserMedia(requestedMedia) {
-    const [mediaStream, setMediaStream] = useState(null);
+    const [mediaStream, setMediaStream] = useState(null)
   
     useEffect(() => {
       async function enableStream() {
         try {
-          const stream = await navigator.mediaDevices.getUserMedia(requestedMedia);
-          setMediaStream(stream);
+          const stream = await navigator.mediaDevices.getUserMedia(requestedMedia)
+          setMediaStream(stream)
         } catch(err) {
           console.log(err)
         }
       }
   
       if (!mediaStream) {
-        enableStream();
+        enableStream()
       } else {
         return function cleanup() {
           mediaStream.getTracks().forEach(track => {
-            track.stop();
+            track.stop()
           });
         }
       }
-    }, [mediaStream, requestedMedia]);
+    }, [mediaStream, requestedMedia])
   
     return mediaStream;
   }
@@ -63,7 +64,9 @@ const AddContentPopup = (props) => {
             <p>(loading video preview)</p>
             <div className={styles.ldsSpinner}><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
             </div>
-        </div>
+
+            <AddContentForm />
+          </div>
     )
 }
 

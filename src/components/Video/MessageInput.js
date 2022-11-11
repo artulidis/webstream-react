@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import styles from '../../css/video.module.css'
 import axios from 'axios'
 import GlobalContext from '../../global/GlobalContext'
-import {ReactComponent as PlaneIcon} from '../../icons/general/plane.svg'
+import PlaneIcon from '../../icons/general/plane.png'
 
 const MessageInput = (props) => {
 
@@ -16,7 +16,7 @@ const MessageInput = (props) => {
 
       <div className={styles.sendMessage}>
         <label>
-          <PlaneIcon onClick={(e) => props.handleSubmit(e)} className={styles.planeIcon} />
+          <img src={PlaneIcon} onClick={(e) => props.handleSubmit(e)} className={styles.planeIcon} />
         </label>
         <button type="submit" onClick={(e) => props.handleSubmit(e)}></button>
       </div>

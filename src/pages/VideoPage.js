@@ -20,7 +20,7 @@ const VideoPage = () => {
   const [input, setInput] = useState('')
   const [isFollowing, setIsFollowing] = useState(false)
   const [videoUser, setVideoUser] = useState('')
-  const { user, following, setFollowing } = useContext(GlobalContext)
+  const { user, thumbnail, following, setFollowing } = useContext(GlobalContext)
   const [isLiked, setIsLiked] = useState('none')
   const [isEdit, setIsEdit] = useState(false)
   const {id} = useParams()
@@ -110,20 +110,17 @@ const VideoPage = () => {
     console.log(videoUser?.followers)
 
     setIsFollowing(!isFollowing)
+    setFollowing(!isFollowing ? [...following, videoUser?.id] : following.filter(user_id => user_id !== videoUser?.id))
+
   }
 
   const handleLike = async (action) => {
-    await axios.put(`http://127.0.0.1:8000/api/video/${id}/`, {
-      topics: post?.topics,
-      user: post?.user,
-      name: post?.name,
+    let response = await axios.put(`http://127.0.0.1:8000/api/video/likes/${id}/`, {
       likes: action === 'like' ? isLiked === true ? post?.likes.filter(liked_user => user.user_id !== liked_user) : [...post?.likes, user.user_id] : isLiked === true ? post?.likes.filter(liked_user => user.user_id !== liked_user) : post?.likes,
       dislikes: action === 'like' ? isLiked === false ? post?.dislikes.filter(disliked_user => user.user_id !== disliked_user) : post?.dislikes : isLiked === false ? post?.dislikes.filter(disliked_user => user.user_id !== disliked_user) : [...post?.dislikes, user.user_id],
-      description: post?.description,
-      views: post?.views,
-      thumbnail: post?.thumbnail,
-      created: post?.created
     })
+
+    console.log(response)
     getVideo()
   }
 
@@ -178,20 +175,38 @@ const VideoPage = () => {
             </div>
           </div>
         </VideoInfo>
+
+
+        <div className={styles.responsiveChatContainer}>
+          <Chat>
+            <div className={styles.chatHeader}>stream chat</div>
+
+            <div className={styles.messagesContainer}>
+              {
+                messages.sort((a,b)=> a.created < b.created).map((message, index) => (
+                    <ChatMessage message={message} key={index} />
+                ))
+              }
+            </div>
+            <MessageInput handleSubmit={handleSubmit} input={input} setInput={setInput} />
+          </Chat>
+        </div>
       </div>
 
-      <Chat>
-        <div className={styles.chatHeader}>stream chat</div>
+      <div className={styles.chatContainer}>
+        <Chat>
+          <div className={styles.chatHeader}>stream chat</div>
 
-        <div className={styles.messagesContainer}>
-          {
-            messages.sort((a,b)=> a.created < b.created).map((message, index) => (
-                <ChatMessage message={message} key={index} />
-            ))
-          }
-        </div>
-        <MessageInput handleSubmit={handleSubmit} input={input} setInput={setInput} />
-      </Chat>
+          <div className={styles.messagesContainer}>
+            {
+              messages.sort((a,b)=> a.created < b.created).map((message, index) => (
+                  <ChatMessage message={message} key={index} />
+              ))
+            }
+          </div>
+          <MessageInput handleSubmit={handleSubmit} input={input} setInput={setInput} />
+        </Chat>
+      </div>
     </div>
   )
 }

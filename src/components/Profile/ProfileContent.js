@@ -11,7 +11,7 @@ const ProfileContent = (props) => {
 
     const [isAdding, setIsAdding] = useState(false)
 
-    const {profileContent, isEdit} = useContext(GlobalContext)
+    const {profileContent, topicFilter, isEdit} = useContext(GlobalContext)
 
   return (
     <>
@@ -19,9 +19,7 @@ const ProfileContent = (props) => {
     <div className={styles.profileContent}>
       { props.username === undefined && !isEdit ? <div className={styles.addButton}><AddContent onClick={() => setIsAdding(true)} /></div> : null }
         {
-            profileContent?.sort((a,b)=> a.created < b.created).map((post, index) => (
-                 <ContentItem post={post} key={index} />
-            ))
+            profileContent?.sort((a,b)=> a.created < b.created).map((post, index) => topicFilter !== null ? post?.topics.map((postTopic) => postTopic.name === topicFilter ? <ContentItem post={post} key={index} /> : null) : <ContentItem post={post} key={index} />)
         }
     </div>
     </>

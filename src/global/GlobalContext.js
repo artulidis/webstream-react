@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect } from 'react'
+import React, { useState, createContext, useEffect, useRef } from 'react'
 import jwt_decode from 'jwt-decode'
 import { api } from '../global/Axios'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +8,9 @@ const GlobalContext = createContext()
 
 export const GlobalProvider = ({children}) => {
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [isSubscriptionOpen, setIsSubscriptionOpen] = useState(false)
+  const [isTopicOpen, setIsTopicOpen] = useState(false)
   const [authTokens, setAuthTokens] = useState(() => localStorage.getItem('tokens') ? JSON.parse(localStorage.getItem('tokens')) : null)
   const [user, setUser] = useState(() => localStorage.getItem('tokens') ? jwt_decode(localStorage.getItem('tokens')) : null)
   const [profileContent, setProfileContent] = useState(null)
@@ -17,6 +19,8 @@ export const GlobalProvider = ({children}) => {
   const [isEdit, setIsEdit] = useState(false)
   const [profile_image, setProfile_Image] = useState(null)
   const [error, setError] = useState(null)
+  const [topicFilter, setTopicFilter] = useState(null)
+  const [topics, setTopics] = useState([])
   const [isError, setIsError] = useState(false)
 
   const navigate = useNavigate()
@@ -64,6 +68,7 @@ export const GlobalProvider = ({children}) => {
 
   useEffect(() => {
     getUserFollowing()
+    getTopics()
   },[])
 
   const getUserFollowing = async () => {
@@ -71,19 +76,50 @@ export const GlobalProvider = ({children}) => {
     setFollowing(followingList.data.users)
   }
 
+  const getTopics = async () => {
+    let response = await axios.get('http://127.0.0.1:8000/api/topics/')
+    setTopics(response.data) 
+  }
+
+  const toggle = (dropdown, otherRef) => {
+    if(open) {
+      setOpen(!open)
+    }
+    if(dropdown.current.id === "subscriptions" ? !isSubscriptionOpen : !isTopicOpen && window.innerWidth < 1500) {
+        dropdown.current.style.display = "flex"
+        console.log("opened: " + dropdown.current.id)
+    } else {
+        dropdown.current.style.display = "none"
+        console.log("closed: " + dropdown.current.id)
+    }
+
+    if(!open) {
+      if(dropdown.current.id === "subscriptions" ? isTopicOpen : isSubscriptionOpen) {
+        toggle(otherRef)
+      }
+    }
+    
+    dropdown.current.id === "subscriptions" ? setIsSubscriptionOpen(!isSubscriptionOpen) : setIsTopicOpen(!isTopicOpen)
+  } 
+
 
   const context = {
     open, setOpen,
+    toggle,
+    isSubscriptionOpen, setIsSubscriptionOpen,
+    isTopicOpen, setIsTopicOpen,
     authTokens, setAuthTokens,
     user, setUser,
+    topics, setTopics,
     profileContent, setProfileContent,
     loginUser, logoutUser,
     profileInfo, setProfileInfo,
     profile_image, setProfile_Image,
     isEdit, setIsEdit,
+    topicFilter, setTopicFilter,
     error, setError,
     isError, setIsError,
-    following, setFollowing,
+    following, setFollowing
   }
 
   return (
